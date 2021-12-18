@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Netflix.App">
+    <Application.Resources>
+        <Color x:Key="RedColor">#e50915</Color>
+        <Style TargetType="Label">
+            <Setter Property="TextColor" Value="White"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+        </Style>
+
+        <Style TargetType="Label" x:Key="LabelAwesome">
+            <Setter Property="FontFamily" Value="FA"/>
+        </Style>
+    </Application.Resources>
+</Application>

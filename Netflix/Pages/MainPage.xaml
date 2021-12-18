@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Netflix.Pages.MainPage"
+             NavigationPage.HasNavigationBar="False"
+             xmlns:vm="clr-namespace:Netflix.PageModels">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="90"/>
+        </Grid.RowDefinitions>
+        
+        <StackLayout Spacing="0" Grid.Row="0" Grid.RowSpan="2" VerticalOptions="Start">
+            <CarouselView ItemsSource="{Binding Cards}" 
+                          IndicatorView="indicatorView"
+                          CurrentItem="{Binding SelectedCard}"
+                          PeekAreaInsets="0"
+                          FlowDirection="RightToLeft">   
+                <CarouselView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid ColumnDefinitions="*">
+                            <Image Source="{Binding Image}" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+                                <Image.Triggers>
+                                    <DataTrigger TargetType="Image" Binding="{Binding Image}" Value="screen.png">
+                                        <Setter Property="Margin" Value="-20,0,-20,50"/>
+                                    </DataTrigger>
+                                </Image.Triggers>
+                            </Image>
+                            <BoxView>
+                                <BoxView.Triggers>
+                                    <DataTrigger TargetType="BoxView" Binding="{Binding Source={x:RelativeSource AncestorType={x:Type vm:MainPageModel}}, Path=SelectedCard.Image}" Value="screen.png">
+                                        <Setter Property="IsVisible" Value="true"/>
+                                        <Setter Property="Background">
+                                            <Setter.Value>
+                                        <LinearGradientBrush EndPoint="0,1">
+                                            <GradientStop Color="Transparent"
+                                                                      Offset="0.1"/>
+                                            <GradientStop Color="Black"
+                                                                      Offset="1.0"/>
+                                        </LinearGradientBrush>
+                                                
+                                            </Setter.Value>
+                                        </Setter>
+                                    </DataTrigger>
+                                </BoxView.Triggers>
+                            </BoxView>
+                            <StackLayout VerticalOptions="End" Margin="0,50,0,30"
+                                            Spacing="0">                                
+                                <Label Text="{Binding Title}" FontSize="34" 
+                                        HorizontalOptions="Center"/>
+                                <Label Text="{Binding Description}" FontSize="17" 
+                                        HorizontalOptions="Center" Margin="70,30"
+                                        FontAttributes="None" 
+                                        HorizontalTextAlignment="Center"/>
+                            </StackLayout>
+                        </Grid>
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+            </CarouselView>
+            <IndicatorView x:Name="indicatorView"
+                            IndicatorColor="LightGray"
+                            IndicatorSize="10"
+                            SelectedIndicatorColor="{StaticResource RedColor}"
+                            HorizontalOptions="Center"/>
+        </StackLayout>
+        <StackLayout Orientation="Horizontal" Margin="10,0" Padding="0" Spacing="15" VerticalOptions="Center" Grid.Row="0" TabIndex="0">
+            <Image Source="netflixlogo.png" HeightRequest="80" HorizontalOptions="StartAndExpand"/>
+            <Label Text="privacy" FontAttributes="None" TextTransform="Uppercase" HorizontalOptions="End" VerticalOptions="Center"/>
+            <Label Text="sign in" TextTransform="Uppercase" HorizontalOptions="End" VerticalOptions="Center">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding OpenSignInPageCommand}"/>
+                </Label.GestureRecognizers>
+            </Label>
+        </StackLayout>
+        <Button Text="get started"
+                TextColor="White"
+                Margin="20"
+                FontSize="18"
+                BackgroundColor="{StaticResource RedColor}"
+                TextTransform="Uppercase"
+                Grid.Row="2"/>
+    </Grid>
+</ContentPage>

@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:material="clr-namespace:Plugin.MaterialDesignControls;assembly=Plugin.MaterialDesignControls"
+             x:Class="Netflix.Pages.SignInPage"
+             xmlns:c="clr-namespace:Netflix.Controls"
+             NavigationPage.HasBackButton="True">
+    <NavigationPage.TitleView>
+        <StackLayout Orientation="Horizontal">
+            <Image Source="netflixlogo.png" WidthRequest="100"/>
+        </StackLayout>
+    </NavigationPage.TitleView>
+    <ContentPage.Content>
+        <StackLayout Spacing="40" VerticalOptions="Center">
+            <StackLayout Margin="20,0" Spacing="15">                
+                <Frame BackgroundColor="Gray" Padding="5" x:Name="emailFrame">
+                    <Grid Margin="10,0">
+                        <Label x:Name="emailLabel" Text="Email or phone number" TextColor="LightGray"/>
+                        <c:CustomEntry x:Name="email" TextColor="White"/>
+                    </Grid>
+                </Frame>
+                
+                <Frame BackgroundColor="Gray" Padding="5" x:Name="passwordFrame">
+                    <Grid Margin="10,0">
+                        <Label x:Name="passwordLabel" Text="Password" TextColor="LightGray"/>
+                        <c:CustomEntry x:Name="password" IsPassword="{Binding IsPassword}" TextColor="White"/>
+                        <Label Style="{StaticResource LabelAwesome}" Text="&#xf070;" 
+                               x:Name="ShowIcon"
+                               HorizontalOptions="EndAndExpand" VerticalOptions="Center">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding IsPasswordCommand}"/>
+                            </Label.GestureRecognizers>
+                            <Label.Triggers>
+                                <DataTrigger TargetType="Label"  Binding="{Binding IsPassword}" Value="true">
+                                    <Setter Property="Text" Value="&#xf070;"/>
+                                </DataTrigger>
+                                <DataTrigger TargetType="Label" Binding="{Binding IsPassword}" Value="false">
+                                    <Setter Property="Text" Value="&#xf06e;"/>
+                                </DataTrigger>
+                            </Label.Triggers>
+                        </Label>
+                    </Grid>
+                </Frame>
+            </StackLayout>
+            <Button Text="Sign In" TextTransform="None" BackgroundColor="Transparent"
+                    BorderColor="Gray" TextColor="WhiteSmoke" BorderWidth="0.5"
+                    FontSize="18" Padding="17" Margin="20,0">
+                
+            </Button>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
